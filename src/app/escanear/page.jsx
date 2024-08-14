@@ -33,7 +33,9 @@ export default function Escanear() {
                     onError={handleError}
                     onScan={handleScan}
                     style={{ width: '30%' }}
-                    facingMode="environment"
+                    constraints={{
+                        facingMode: { exact: "environment" }
+                    }}
                 />
             )}
             {wallet && (
