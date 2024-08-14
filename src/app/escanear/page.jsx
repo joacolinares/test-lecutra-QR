@@ -35,7 +35,7 @@ export default function Escanear() {
                     style={{ width: '30%' }}
                     constraints={{
                         video: {
-                            facingMode: { exact: "environment" },
+                            facingMode: { ideal: "environment" },
                         },
                     }}
                 />
