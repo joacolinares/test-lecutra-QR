@@ -34,7 +34,9 @@ export default function Escanear() {
                     onScan={handleScan}
                     style={{ width: '30%' }}
                     constraints={{
-                        facingMode: { exact: "environment" }
+                        video: {
+                            facingMode: { exact: "environment" },
+                        },
                     }}
                 />
             )}
