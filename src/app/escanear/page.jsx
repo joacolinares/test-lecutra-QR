@@ -11,7 +11,7 @@ export default function Escanear() {
 
     const handleScan = (data) => {
         if (data) {
-            setWallet(data.text);
+            setWallet(data);
             setIsScannerOpen(false);
         }
     };
