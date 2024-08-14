@@ -1,50 +1,41 @@
 'use client';
 
-import { useState } from "react";
-import dynamic from 'next/dynamic';
-
-const QrReader = dynamic(() => import('react-qr-scanner'), { ssr: false });
+import { useEffect, useRef, useState } from 'react';
+import { Html5QrcodeScanner } from 'html5-qrcode';
 
 export default function Escanear() {
-    const [wallet, setWallet] = useState('');
-    const [isScannerOpen, setIsScannerOpen] = useState(false);
+    const [ wallet, setWallet ] = useState('')
 
-    const handleScan = (data) => {
-        if (data) {
-            setWallet(data);
-            setIsScannerOpen(false);
+    const scannerRef = useRef(null);
+
+    useEffect(() => {
+        const scanner = new Html5QrcodeScanner(
+            "qr-reader", 
+            { fps: 10, qrbox: 250 }
+        );
+
+        scanner.render(onScanSuccess, onScanError);
+
+        function onScanSuccess(decodedText) {
+            console.log(`Código QR escaneado: ${decodedText}`);
+            setWallet(decodedText)
         }
-    };
 
-    const handleError = (err) => {
-        console.error(err);
-    };
+        function onScanError(errorMessage) {
+            console.error("Error en el escaneo: ", errorMessage);
+        }
 
-    const openScanner = () => {
-        setIsScannerOpen(true);
-    };
+        return () => {
+            scanner.clear().catch(error => {
+                console.error("Error limpiando el escáner: ", error);
+            });
+        };
+    }, []);
 
     return (
-        <div>
-            <button onClick={openScanner}>Abrir Escáner</button>
-            {isScannerOpen && (
-                <QrReader
-                    delay={300}
-                    onError={handleError}
-                    onScan={handleScan}
-                    style={{ width: '30%' }}
-                    constraints={{
-                        video: {
-                            facingMode: { ideal: "environment" },
-                        },
-                    }}
-                />
-            )}
-            {wallet && (
-                <div>
-                    <h2>Wallet: {wallet}</h2>
-                </div>
-            )}
-        </div>
-    );
+        <>
+            <div id="qr-reader" ref={scannerRef}></div>
+            {wallet && <h2>{wallet}</h2>}
+        </>
+    )
 }
