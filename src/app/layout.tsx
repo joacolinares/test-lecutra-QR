@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from 'next/font/google';
 import "./globals.css";
 import { ThirdwebProvider } from "./thirdweb";
+import { ChakraProvider } from "@chakra-ui/react";
+import NavBar from "../components/NavBar";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-poppins',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+});
 
 export const metadata: Metadata = {
-  title: "thirdweb SDK + Next starter",
+  title: "World Token Congress",
   description:
-    "Starter template for using thirdweb SDK with Next.js App router",
+    "World Token Congress",
 };
 
 export default function RootLayout({
@@ -17,9 +24,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ThirdwebProvider>{children}</ThirdwebProvider>
+    <html lang="es" className={poppins.className}>
+      <body>
+        <ThirdwebProvider>
+          <ChakraProvider>
+            <NavBar/>
+            {children}
+          </ChakraProvider>
+        </ThirdwebProvider>
       </body>
     </html>
   );
