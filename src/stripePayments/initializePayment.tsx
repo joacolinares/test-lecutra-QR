@@ -12,19 +12,27 @@ if (process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY === undefined) {
 }
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
+interface InitializePaymentProps {
+  amountNumber: number; // Monto a cobrar
+  email: string; // Email del cliente
+  walletId: string; // ID de la billetera
+  customerName?: string; // Nombre del cliente (opcional)
+}
+
 export default function InitializePayment({
   amountNumber,
-}: {
-  amountNumber: number;
-}) {
-  const amount = amountNumber; // Aquí se pone lo que se quiere cobrar. Hay que poner los centavos también.
+  email,
+  walletId,
+  customerName,
+}: InitializePaymentProps) {
+  const amount = amountNumber;
 
   if (!amountNumber) {
     alert("No hay cantidad de dinero para cobrar. Falló el pago.");
 
-    setTimeout(() => {
+    /*    setTimeout(() => {
       window.location.href = `/`;
-    }, 1000);
+    }, 1000); */
   }
 
   return (
@@ -47,9 +55,9 @@ export default function InitializePayment({
       >
         <CheckoutPage
           amount={amount}
-          email={"zzzzzzzzzzzz@example.com"}
-          walletId={"0xzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"}
-          /*  customerName={"John Doe"} */ // Aquí se habilita el nombre del usuario, no es necesario, pero si lo consiguen, stripe recomienda ponerlo para disminuir la probabiliad de fraudes.
+          email={email}
+          walletId={walletId}
+          customerName={customerName ? customerName : undefined} // Aquí se habilita el nombre del usuario, no es necesario, pero si lo consiguen, stripe recomienda ponerlo para disminuir la probabiliad de fraudes.
         />
       </Elements>
     </main>
