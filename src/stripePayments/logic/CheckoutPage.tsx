@@ -70,11 +70,14 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({
       return;
     }
 
+    const currentDomain = window.location.origin; // Get the current domain (protocol + host)
+    const returnUrl = `${currentDomain}/payment-success?amount=${amount}`; // Construct the return URL
+
     const { error } = await stripe.confirmPayment({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `http://www.localhost:3000/payment-success?amount=${amount}`,
+        return_url: returnUrl,
       },
       redirect: "if_required",
     });
