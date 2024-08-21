@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "runall": "npm i && next build && next start"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
@@ -20,7 +21,10 @@
     "react": "^18.3",
     "react-dom": "^18.3",
     "react-qr-scanner": "^1.0.0-alpha.11",
-    "thirdweb": "^5"
+    "thirdweb": "^5",
+    "@stripe/react-stripe-js": "^2.7.1",
+    "@stripe/stripe-js": "^3.5.0",
+    "stripe": "^15.11.0"
   },
   "devDependencies": {
     "@types/node": "^20",
