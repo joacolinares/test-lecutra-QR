@@ -36,6 +36,7 @@ export default function Escanear() {
         <>
             <div id="qr-reader" ref={scannerRef}></div>
             {wallet && <h2>{wallet}</h2>}
+            test
         </>
     )
 }
