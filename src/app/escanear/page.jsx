@@ -60,7 +60,7 @@ export default function Escanear() {
 
     return (
         <VStack spacing={4} align="center" pt={10} bg={'#000012'} minH={'full'}>
-            <Button onClick={() => setScanQr(true)} colorScheme="teal" size="lg">
+            <Button onClick={() => setScanQr(true)} size="lg">
                 Escanear usuario
             </Button>
             {scanQr && (
