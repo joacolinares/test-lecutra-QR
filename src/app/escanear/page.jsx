@@ -70,7 +70,7 @@ export default function Escanear() {
             )}
             {wallet && (
                 <Heading size="md" mt={4}>
-                    Wallet escaneada: {wallet}
+                    Wallet escaneada: {wallet.data}
                 </Heading>
             )}
         </VStack>
