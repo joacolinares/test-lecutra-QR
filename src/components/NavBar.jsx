@@ -1,11 +1,12 @@
 'use client'
 
-import { Box, Flex, Image, HStack, IconButton, useDisclosure, Stack, Text, Divider } from '@chakra-ui/react';
+import { Box, Flex, Image, HStack, IconButton, useDisclosure, Stack, Text } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import NextLink from 'next/link';
 import { client } from '../app/client';
 import { chain } from '../app/chain'
 import { ConnectButton, useActiveAccount } from 'thirdweb/react';
+import LOGO from "../assets/logo.png"
 
 export default function NavBar() {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -13,18 +14,15 @@ export default function NavBar() {
 
     return (
       <>
-        <Box py={5} px={5} as='nav' bg="#292782" fontWeight={'500'}>
+        <Box py={5} px={10} as='nav' bg="#000012" fontWeight={'500'}>
             <Flex direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
                 <HStack spacing={8} alignItems={'center'}>
                     <NextLink href='/' passHref>
-                        {/*
                         <Image 
-                            src={LOGO_RES.src}
-                            alt='Steel Shock'
-                            w='37px'
-                            display={{ base: 'block', md: 'none' }}
+                            src={LOGO.src}
+                            alt='World Token Congress'
+                            w='80px'
                         />
-                        */}
                     </NextLink>
                 </HStack>
                 <HStack
